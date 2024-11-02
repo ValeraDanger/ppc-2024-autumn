@@ -8,7 +8,7 @@
 
 #include "mpi/petrov_o_num_of_alternations_signs/include/ops_mpi.hpp"
 
-TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_Simple) {
+TEST(Sequential, TestAlternations_Simple) {
   std::vector<int> input = {1, -2, 3, -4, 5};
   std::vector<int> output(1);  // Вектор для результата
 
@@ -28,7 +28,7 @@ TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_Simple) {
   ASSERT_EQ(output[0], 4);  // Ожидаемое количество чередований: 4
 }
 
-TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_AllPositive) {
+TEST(Sequential, TestAlternations_AllPositive) {
   std::vector<int> input = {1, 2, 3, 4, 5};
   std::vector<int> output(1);
 
@@ -48,7 +48,7 @@ TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_AllPositive) {
   ASSERT_EQ(output[0], 0);  // Ожидаемое количество чередований: 0
 }
 
-TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_AllNegative) {
+TEST(Sequential, TestAlternations_AllNegative) {
   std::vector<int> input = {-1, -2, -3, -4, -5};
   std::vector<int> output(1);
 
@@ -68,7 +68,7 @@ TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_AllNegative) {
   ASSERT_EQ(output[0], 0);  // Ожидаемое количество чередований: 0
 }
 
-TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_Empty) {
+TEST(Sequential, TestAlternations_Empty) {
   std::vector<int> input = {};
   std::vector<int> output(1);
 
@@ -88,7 +88,7 @@ TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_Empty) {
   ASSERT_EQ(output[0], 0);  // Ожидаемое количество чередований: 0
 }
 
-TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_OneElement) {
+TEST(Sequential, TestAlternations_OneElement) {
   std::vector<int> input = {1};
   std::vector<int> output(1);
 
@@ -108,7 +108,7 @@ TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_OneElement) {
   ASSERT_EQ(output[0], 0);  // Ожидаемое количество чередований: 0
 }
 
-TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_LargeInput) {
+TEST(Sequential, TestAlternations_LargeInput) {
   const int size = 1000;
   std::vector<int> input(size);
   std::iota(input.begin(), input.end(), 1);  // Заполняем числами от 1 до 1000
@@ -137,7 +137,7 @@ TEST(petrov_o_num_of_alternations_signs_seq, TestAlternations_LargeInput) {
 }
 
 /*Параллельные тесты*/
-TEST(petrov_o_num_of_alternations_signs_par, TestAlternations_Simple) {
+TEST(Parallel, TestAlternations_Simple) {
   boost::mpi::communicator world;
 
   std::vector<int> input = {1, -2, 3, -4, 5, -6, 7, -8, 9, -10, 11, -12, 13, -14, 15, -16, 17, -18, 19, -20};
@@ -162,7 +162,7 @@ TEST(petrov_o_num_of_alternations_signs_par, TestAlternations_Simple) {
   }  // Ожидаемое количество чередований: 4
 }
 
-TEST(petrov_o_num_of_alternations_signs_par, TestAlternations_AllPositive) {
+TEST(Parallel, TestAlternations_AllPositive) {
   boost::mpi::communicator world;
 
   std::vector<int> input = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
@@ -187,7 +187,7 @@ TEST(petrov_o_num_of_alternations_signs_par, TestAlternations_AllPositive) {
   }  // Ожидаемое количество чередований: 0
 }
 
-TEST(petrov_o_num_of_alternations_signs_par, TestAlternations_AllNegative) {
+TEST(Parallel, TestAlternations_AllNegative) {
   boost::mpi::communicator world;
 
   std::vector<int> input = {-1, -2, -3, -4, -5, -6, -7, -8, -9, -10, -11, -12, -13, -14, -15, -16, -17, -18, -19, -20};
@@ -212,7 +212,7 @@ TEST(petrov_o_num_of_alternations_signs_par, TestAlternations_AllNegative) {
   }  // Ожидаемое количество чередований: 0
 }
 
-TEST(petrov_o_num_of_alternations_signs_par, TestAlternations_Empty) {
+TEST(Parallel, TestAlternations_Empty) {
   boost::mpi::communicator world;
 
   std::vector<int> input = {};
@@ -231,7 +231,7 @@ TEST(petrov_o_num_of_alternations_signs_par, TestAlternations_Empty) {
   ASSERT_FALSE(task.validation());
 }
 
-TEST(petrov_o_num_of_alternations_signs_par, TestAlternations_LargeInput) {
+TEST(Parallel, TestAlternations_LargeInput) {
   boost::mpi::communicator world;
 
   const int size = 1000;
@@ -264,7 +264,7 @@ TEST(petrov_o_num_of_alternations_signs_par, TestAlternations_LargeInput) {
   }  // Ожидаемое количество чередований для чередующихся знаков
 }
 
-TEST(petrov_o_num_of_alternations_signs_par, TestAlternations_Random) {
+TEST(Parallel, TestAlternations_Random) {
   boost::mpi::communicator world;
 
   const int size = 1000;
