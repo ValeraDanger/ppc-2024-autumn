@@ -1,3 +1,4 @@
+// Copyright 2024 Nesterov Alexander
 #include "seq/petrov_o_num_of_alternations_signs/include/ops_seq.hpp"
 
 using namespace std::chrono_literals;
